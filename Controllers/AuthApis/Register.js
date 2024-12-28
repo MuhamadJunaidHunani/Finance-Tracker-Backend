@@ -2,10 +2,6 @@
 const registerUser = async (req, res) => {
     const { email, password, userName } = req.body;
   
-    if (!req.file || Object.keys(req.file).length === 0) {
-      return res.status(400).json({ message: "PDF file is required" });
-    }
-  
     try {
       const existingUser = await UserModal.findOne({
         $or: [{ email }, { nickName }],
