@@ -6,9 +6,7 @@ const userRegisterValidate = (req, res, next) => {
       "string.min": "userName must be at least 3 characters",
       "string.max": "userName must be at most 100 characters",
     }),
-
     email: Joi.string().email().required(),
-
     password: Joi.string()
       .min(6)
       .required()
@@ -28,6 +26,7 @@ const userRegisterValidate = (req, res, next) => {
       message: errorMessages.join(","),
     });
   }
+
   next();
 };
 
