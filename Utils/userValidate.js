@@ -28,7 +28,6 @@ const userRegisterValidate = (req, res, next) => {
       message: errorMessages.join(","),
     });
   }
-
   next();
 };
 
