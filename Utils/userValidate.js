@@ -25,7 +25,7 @@ const userRegisterValidate = (req, res, next) => {
   if (error) {
     const errorMessages = error.details.map((err) => err.message);
     return res.status(400).json({
-      message: errorMessages.join(", "),
+      message: errorMessages.join(","),
     });
   }
 
