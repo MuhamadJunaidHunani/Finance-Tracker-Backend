@@ -6,3 +6,5 @@ const generateHash = async(password, saltRounds = 10)=>{
         throw new Error('Error hashing the password: ' + error.message);
     }
 }
+
+module.exports = generateHash;
