@@ -1,8 +1,7 @@
 const UserModel = require("../../Models/UserModel");
-const generateHash = require("../../Utils/GenerateHash");
+const {generateHash} = require("../../Utils/BCrypt");
 const generateJwtToken = require("../../Utils/GenerateJwt");
 
-// register user
 const registerUser = async (req, res) => {
   const { email, password, userName } = req.body;
 
@@ -10,7 +9,7 @@ const registerUser = async (req, res) => {
     const existingUser = await UserModel.findOne({ email });
 
     if (existingUser) {
-      return res.status(409).json({ message : "Email already exists" });
+      return res.status(409).json({ message: "Email already exists" });
     }
 
     const hashedPassword = await generateHash(password);
@@ -23,10 +22,11 @@ const registerUser = async (req, res) => {
 
     const savedUser = await newUser.save();
     savedUser.password = undefined;
-    savedUser.__v = undefined;
-    const token = generateJwtToken({email})
+    const token = generateJwtToken({ email });
 
-    return res.status(201).json({ message : "Successfully Registered" , data: savedUser, token});
+    return res
+      .status(201)
+      .json({ message: "Successfully Registered", data: savedUser, token });
   } catch (error) {
     console.error("Error during user registration:", error.message);
     return res
