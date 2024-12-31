@@ -1,41 +1,32 @@
+const UserModel = require("../../Models/UserModel");
+const generateHash = require("../../Utils/GenerateHash");
+const generateJwtToken = require("../../Utils/GenerateJwt");
+
 // register user
 const registerUser = async (req, res) => {
   const { email, password, userName } = req.body;
 
   try {
-    const existingUser = await UserModal.findOne({ email });
+    const existingUser = await UserModel.findOne({ email });
 
     if (existingUser) {
-      const message =
-        existingUser.email === email
-          ? "Email already exists"
-          : "NickName already exists";
-      return res.status(409).json({ message });
+      return res.status(409).json({ message : "Email already exists" });
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await generateHash(password);
 
-    const fileData = {
-      file: req.file.location,
-      name: req.file.originalname,
-      timestamp: Date.now(),
-      type: req.file.mimetype,
-    };
-
-    const newUser = new UserModal({
-      ...req.body,
+    const newUser = new UserModel({
+      userName,
       email,
       password: hashedPassword,
-      nickName,
-      currentWeekPdf: fileData,
-      pdfs: [fileData],
     });
 
     const savedUser = await newUser.save();
-
     savedUser.password = undefined;
+    savedUser.__v = undefined;
+    const token = generateJwtToken({email})
 
-    return res.status(201).json(savedUser);
+    return res.status(201).json({ message : "Successfully Registered" , data: savedUser, token});
   } catch (error) {
     console.error("Error during user registration:", error.message);
     return res

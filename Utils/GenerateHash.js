@@ -1,3 +1,5 @@
+const bcrypt = require('bcrypt')
+
 const generateHash = async(password, saltRounds = 10)=>{
     try {
         const hashedPassword = await bcrypt.hash(password, saltRounds);

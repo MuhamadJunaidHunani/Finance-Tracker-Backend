@@ -12,6 +12,5 @@ routes.post(
   userRegisterValidate,
   registerUser
 );
-routes.post("/login", loginUser);
 
 module.exports = { routes };
