@@ -11,7 +11,7 @@ const loginUser = async (req, res) => {
   
     try {
       const user = await UserModel.findOne({ email });
-  
+
       if (!user || !(await compareHash(password , user.password))) {
         return res.status(401).json({ message: "Invalid email or password" });
       }
