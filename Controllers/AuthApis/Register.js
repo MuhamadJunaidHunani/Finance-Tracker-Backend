@@ -1,5 +1,5 @@
 const UserModel = require("../../Models/UserModel");
-const {generateHash} = require("../../Utils/BCrypt");
+const { generateHash } = require("../../Utils/BCrypt");
 const generateJwtToken = require("../../Utils/GenerateJwt");
 
 const registerUser = async (req, res) => {
