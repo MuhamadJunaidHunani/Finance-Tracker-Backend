@@ -12,8 +12,6 @@ const generateHash = async (password, saltRounds = 10) => {
 const compareHash = async (upcomingPassword, userPassword) => {
   try {
     const comparedResult = await bcrypt.compare(upcomingPassword, userPassword);
-    console.log(comparedResult, "////////////");
-
     return comparedResult;
   } catch (error) {
     throw new Error("Error Comparing the password: " + error.message);

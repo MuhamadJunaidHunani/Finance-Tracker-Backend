@@ -1,6 +1,6 @@
 const UserModel = require("../../Models/UserModel");
 const { generateHash } = require("../../Utils/BCrypt");
-const generateJwtToken = require("../../Utils/GenerateJwt");
+const {generateJwtToken} = require("../../Utils/Jwt");
 
 const registerUser = async (req, res) => {
   const { email, password, userName } = req.body;
@@ -22,7 +22,7 @@ const registerUser = async (req, res) => {
 
     const savedUser = await newUser.save();
     savedUser.password = undefined;
-    const token = generateJwtToken({ email });
+    const token = generateJwtToken({ _id: savedUser._id });
 
     return res
       .status(201)

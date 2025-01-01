@@ -1,6 +1,6 @@
 const UserModel = require("../../Models/UserModel");
 const { compareHash } = require("../../Utils/BCrypt");
-const generateJwtToken = require("../../Utils/GenerateJwt");
+const {generateJwtToken} = require("../../Utils/Jwt");
 
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
@@ -16,7 +16,7 @@ const loginUser = async (req, res) => {
       return res.status(401).json({ message: "Invalid email or password" });
     }
     user.password = undefined;
-    const token = generateJwtToken({ email });
+    const token = generateJwtToken({ _id: user._id });
     return res.json({
       message: "Logged In Successfully",
       data: user.toObject(),
