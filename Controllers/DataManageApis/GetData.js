@@ -11,6 +11,7 @@ const getData = async (req, res) => {
     if (category) {
       query.category = category;
     }
+    
 
     if (startDate && endDate) {
       query.date = { $gte: new Date(startDate), $lte: new Date(endDate) };
