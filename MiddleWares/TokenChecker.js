@@ -13,8 +13,6 @@ const tokenChecker = (req, res, next) => {
     
     const decoded = verifyJwt(token);
     req.query.userId = decoded._id;
-    console.log(decoded , req.query);
-    
     next();
   } catch (err) {
     if (err.name === "TokenExpiredError") {

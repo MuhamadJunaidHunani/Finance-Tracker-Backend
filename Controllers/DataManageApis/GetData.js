@@ -1,9 +1,9 @@
 const FinanceModel = require("../../Models/FinanceModel");
 
-const GetData = async (req, res) => {
+const getData = async (req, res) => {
   try {
-    const { type, category, startDate, endDate, amountRange } = req.query;
-    let query = {};
+    const { type, category, startDate, endDate, amountRange , userId } = req.query;
+    let query = {userId};
 
     if (type) {
       query.type = type;
@@ -54,3 +54,5 @@ const GetData = async (req, res) => {
       });
   }
 };
+
+module.exports = getData;

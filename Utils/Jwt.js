@@ -9,8 +9,6 @@ const generateJwtToken = (payload) => {
 const verifyJwt = (token) => {
   const secretKey = process.env.JWT_SECRET;
   const decoded = jwt.verify(token, secretKey);
-  console.log(token , secretKey , decoded );
-
   return decoded;
 };
 
