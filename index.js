@@ -29,3 +29,5 @@ if (process.env.NODE_ENV !== "production") {
         console.log(`server is listeing on http://localhost:${port}/`);
     });
 }
+
+module.exports = app;
