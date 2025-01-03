@@ -20,11 +20,12 @@ app.use(
   })
 );
 
+connectDb(URI);
 app.get("/", (req, res) => {
-  res.send("Hello from the backend");
+  res.send("Hello World");
 });
-
-app.listen(port, () => {
-  console.log(`server is listeing on http://localhost:${port}/`);
-  connectDb(URI);
-});
+if (process.env.NODE_ENV !== "production") {
+    app.listen(port, () => {
+        console.log(`server is listeing on http://localhost:${port}/`);
+    });
+}
