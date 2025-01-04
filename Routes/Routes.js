@@ -6,6 +6,7 @@ const loginUser = require("../Controllers/AuthApis/Login");
 const addData = require("../Controllers/DataManageApis/AddData");
 const tokenChecker = require("../MiddleWares/TokenChecker");
 const getData = require("../Controllers/DataManageApis/GetData");
+const getMe = require("../Controllers/AuthApis/getMe");
 
 // post APIs
 routes.post("/register", userRegisterValidate, registerUser);
@@ -14,5 +15,6 @@ routes.post("/add-data", tokenChecker, addData);
 
 // get APIs
 routes.get("/get-data", tokenChecker, getData);
+routes.get("/get-me", tokenChecker, getMe);
 
 module.exports = { routes };

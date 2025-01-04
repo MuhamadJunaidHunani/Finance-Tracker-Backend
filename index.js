@@ -24,10 +24,11 @@ connectDb(URI);
 app.get("/", (req, res) => {
   res.send("Hello World");
 });
+
 if (process.env.NODE_ENV !== "production") {
-    app.listen(port, () => {
-        console.log(`server is listeing on http://localhost:${port}/`);
-    });
+  app.listen(port, () => {
+    console.log(`server is listeing on http://localhost:${port}/`);
+  });
 }
 
 module.exports = app;
