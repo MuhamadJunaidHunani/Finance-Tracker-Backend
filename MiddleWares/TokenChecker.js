@@ -11,6 +11,7 @@ const tokenChecker = (req, res, next) => {
 
   try {
     const decoded = verifyJwt(token);
+    
     req.query.userId = decoded._id;
     next();
   } catch (err) {
