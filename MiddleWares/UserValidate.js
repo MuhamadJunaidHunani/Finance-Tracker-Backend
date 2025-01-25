@@ -1,6 +1,9 @@
 const Joi = require("joi");
 
-const userRegisterValidate = (req, res, next) => {
+const userRegisterValidate = (req, res) => {
+  console.log(req.body);
+  const { email, userName, password } = req.body;
+
   const schema = Joi.object({
     userName: Joi.string().required().messages({
       "string.min": "userName must be at least 3 characters",
@@ -18,7 +21,10 @@ const userRegisterValidate = (req, res, next) => {
       }),
   });
 
-  const { error } = schema.validate(req.body, { abortEarly: false });
+  const { error } = schema.validate(
+    { email, userName, password },
+    { abortEarly: false }
+  );
 
   if (error) {
     const errorMessages = error.details.map((err) => err.message);
@@ -27,7 +33,7 @@ const userRegisterValidate = (req, res, next) => {
     });
   }
 
-  next();
+  return null;
 };
 
-module.exports = userRegisterValidate ;
+module.exports = userRegisterValidate;

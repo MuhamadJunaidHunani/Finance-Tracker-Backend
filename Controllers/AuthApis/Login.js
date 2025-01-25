@@ -3,6 +3,7 @@ const { compareHash } = require("../../Utils/BCrypt");
 const {generateJwtToken} = require("../../Utils/Jwt");
 
 const loginUser = async (req, res) => {
+  
   const { email, password } = req.body;
 
   if (!email || !password) {
@@ -14,6 +15,9 @@ const loginUser = async (req, res) => {
 
     if (!user || !(await compareHash(password, user.password))) {
       return res.status(401).json({ message: "Invalid email or password" });
+    }
+    if(!user.verified){
+      return res.status(401).json({ message: "User Not Verified" });
     }
     user.password = undefined;
     const token = generateJwtToken({ _id: user._id });

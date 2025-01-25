@@ -5,7 +5,7 @@ const getMe = async (req, res) => {
     const { userId } = req.query;
 
     const currentUser = await UserModel.find({ _id: userId });
-
+    currentUser.password = undefined;
     res.status(200).json({
       message: "fetched successfully.",
       data: currentUser,

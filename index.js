@@ -8,26 +8,26 @@ const { routes } = require("./Routes/Routes");
 dotenv.config();
 app.use(express.json());
 
-const port = process.env.PORT;
-const URI = process.env.MONGO_URI;
-
-app.use("/api", routes);
-
-app.use(cors());
 app.use(
   cors({
     origin: "*",
   })
 );
 
+const port = process.env.PORT;
+const URI = process.env.MONGO_URI;
+
 connectDb(URI);
+
+app.use("/api", routes);
+
 app.get("/", (req, res) => {
   res.send("Hello World");
 });
 
 if (process.env.NODE_ENV !== "production") {
   app.listen(port, () => {
-    console.log(`server is listeing on http://localhost:${port}/`);
+    console.log(`server is listening on http://localhost:${port}/`);
   });
 }
 
